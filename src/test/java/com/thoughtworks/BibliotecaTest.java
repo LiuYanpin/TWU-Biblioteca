@@ -8,14 +8,14 @@ import static org.junit.Assert.*;
 
 public class BibliotecaTest {
 
-    private final String expectWelcomeMessage = "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!";
+    private final String expectWelcomeMessage = "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!\n";
 
     @Rule
     public final SystemOutRule log = new SystemOutRule().enableLog();
 
     @Test
     public void should_print_welcome_message_when_start_the_application() {
-        System.out.print(expectWelcomeMessage);
+        new Biblioteca();
         String actualWelcomeMessage = this.log.getLog();
         assertEquals(expectWelcomeMessage, actualWelcomeMessage);
     }
