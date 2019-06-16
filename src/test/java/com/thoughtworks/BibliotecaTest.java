@@ -101,4 +101,13 @@ public class BibliotecaTest {
         assertEquals(expectBookList, actualBookList);
     }
 
+    @Test
+    public void should_get_notified_message_when_return_a_book_successfully() {
+        biblioteca.checkOutBook("01");
+        this.log.clearLog();
+        biblioteca.returnBook("01");
+        String expectMessage = "Thank you for returning the book\n";
+        String actualMessage = this.log.getLog();
+        assertEquals(expectMessage, actualMessage);
+    }
 }

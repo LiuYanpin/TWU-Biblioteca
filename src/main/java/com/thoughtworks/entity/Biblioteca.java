@@ -56,5 +56,6 @@ public class Biblioteca {
 
     public void returnBook(String bookId) {
         lentBooks.remove(bookId);
+        System.out.println("Thank you for returning the book");
     }
 }
