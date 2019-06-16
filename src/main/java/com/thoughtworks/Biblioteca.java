@@ -6,7 +6,6 @@ import com.thoughtworks.entity.Book;
 import com.thoughtworks.entity.Menu;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Biblioteca {
@@ -24,28 +23,31 @@ public class Biblioteca {
             new Book("Jane Eyre", "Charlotte Brontë", 1847)
     );
     private static List<Menu> MENU_LIST = Lists.newArrayList(
-            new Menu("01", "List of books")
+            new Menu("01", "List of books"),
+            new Menu("02", "Exit")
     );
 
     public static void main(String[] args) {
         printWelcomeMessage();
         printMenu();
         Scanner scanner = new Scanner(System.in);
-        String nextLine = scanner.nextLine();
-        while (!Strings.isNullOrEmpty(nextLine)) {
-            if (containsMenu(nextLine)) {
-                printBookList();
-                break;
-            } else {
-                System.out.println("Please select a valid option!");
-                nextLine = scanner.nextLine();
+        String option = scanner.nextLine();
+        while (!Strings.isNullOrEmpty(option)) {
+            switch (option) {
+                case "01":
+                    printBookList();
+                    break;
+                case "02":
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Please select a valid option!");
+                    break;
             }
+            printMenu();
+            option = scanner.nextLine();
         }
 
-    }
-
-    private static boolean containsMenu(String menu) {
-        return MENU_LIST.stream().anyMatch(m -> m.getCode().equals(menu) || m.getValue().equals(menu));
     }
 
     public static void printWelcomeMessage() {
