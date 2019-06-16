@@ -15,12 +15,4 @@ public class Menu {
                 .append(value)
                 .toString();
     }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getValue() {
-        return value;
-    }
 }

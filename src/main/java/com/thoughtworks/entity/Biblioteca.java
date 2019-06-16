@@ -1,6 +1,7 @@
 package com.thoughtworks.entity;
 
 import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +22,11 @@ public class Biblioteca {
     );
     private List<Menu> MENU_LIST = Lists.newArrayList(
             new Menu("01", "List of books"),
-            new Menu("02", "Exit")
+            new Menu("02", "Exit"),
+            new Menu("03", "Check-out book"),
+            new Menu("04", "Return book")
     );
+
     private List<String> lentBooks = new ArrayList<>();
 
     public void printWelcomeMessage() {
@@ -30,15 +34,18 @@ public class Biblioteca {
     }
 
     public void printBookList() {
+        System.out.println(StringUtils.repeat("*", 30) + " Book List " + StringUtils.repeat("*", 26));
         BOOK_LIST.stream()
                 .filter(book -> !lentBooks.contains(book.getId()))
                 .forEach(book -> System.out.println(book));
     }
 
     public void printMenu() {
+        System.out.println(StringUtils.repeat("*", 30) + " Menu " + StringUtils.repeat("*", 30));
         for (Menu menu : MENU_LIST) {
             System.out.println(menu);
         }
+        System.out.println("Please select a valid option:");
     }
 
     public void checkOutBook(String bookId) {
@@ -50,10 +57,6 @@ public class Biblioteca {
         }
     }
 
-    public boolean containsBook(String bookId) {
-        return BOOK_LIST.stream().anyMatch(book -> bookId.equals(book.getId()));
-    }
-
     public void returnBook(String bookId) {
         if (lentBooks.contains(bookId)) {
             System.out.println("Thank you for returning the book");
@@ -61,5 +64,9 @@ public class Biblioteca {
         } else {
             System.out.println("That is not a valid book to return.");
         }
+    }
+
+    private boolean containsBook(String bookId) {
+        return BOOK_LIST.stream().anyMatch(book -> bookId.equals(book.getId()) && !lentBooks.contains(bookId));
     }
 }
