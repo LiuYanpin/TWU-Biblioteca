@@ -13,8 +13,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return new StringBuilder()
-                .append(String.format("%-30s", name))
+        return new StringBuilder(String.format("%-30s", name))
                 .append(String.format("%-22s", author))
                 .append(String.format("%-5d", publishYear))
                 .toString();
