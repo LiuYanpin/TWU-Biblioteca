@@ -1,10 +1,12 @@
 package com.thoughtworks;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.thoughtworks.entity.Book;
 import com.thoughtworks.entity.Menu;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Biblioteca {
@@ -29,9 +31,17 @@ public class Biblioteca {
         printWelcomeMessage();
         printMenu();
         Scanner scanner = new Scanner(System.in);
-        while (containsMenu(scanner.nextLine())) {
-            printBookList();
+        String nextLine = scanner.nextLine();
+        while (!Strings.isNullOrEmpty(nextLine)) {
+            if (containsMenu(nextLine)) {
+                printBookList();
+                break;
+            } else {
+                System.out.println("Please select a valid option!");
+                nextLine = scanner.nextLine();
+            }
         }
+
     }
 
     private static boolean containsMenu(String menu) {
