@@ -1,6 +1,7 @@
 package com.thoughtworks;
 
 import com.thoughtworks.entity.Biblioteca;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -10,6 +11,7 @@ import static org.junit.Assert.assertEquals;
 
 public class BibliotecaTest {
 
+    private static final String PREFIX_STRING = StringUtils.repeat("*", 30) + " Book List " + StringUtils.repeat("*", 26) + "\n";
     private static final String ALL_BOOK_LIST =
             "01  The Pilgrim’s Progress        John Bunyan           1678 \n" +
             "02  Robinson Crusoe               Daniel Defoe          1719 \n" +
@@ -43,15 +45,22 @@ public class BibliotecaTest {
     public void should_print_book_list_when_after_welcome_message_appears() {
         biblioteca.printBookList();
         String actualBookString = this.log.getLog();
-        String expectBookString = ALL_BOOK_LIST;
+        String expectBookString = PREFIX_STRING + ALL_BOOK_LIST;
         assertEquals(expectBookString, actualBookString);
     }
 
     @Test
     public void should_print_menu_of_options() {
         biblioteca.printMenu();
+
         String actualMenuString = this.log.getLog();
-        String expectMenuString = "01  List of books\n" + "02  Exit\n";
+        String prefixString = StringUtils.repeat("*", 30) + " Menu " + StringUtils.repeat("*", 30);
+        String expectMenuString = "****************************** Menu ******************************\n" +
+                "01  List of books\n" +
+                "02  Exit\n" +
+                "03  Check-out book\n" +
+                "04  Return book\n" +
+                "Please select a valid option:\n";
         assertEquals(expectMenuString, actualMenuString);
     }
 
@@ -61,7 +70,7 @@ public class BibliotecaTest {
         this.log.clearLog();
         biblioteca.printBookList();
         String actualBookList = this.log.getLog();
-        String expectBookList =
+        String expectBookList = PREFIX_STRING +
                 "02  Robinson Crusoe               Daniel Defoe          1719 \n" +
                 "03  Gulliver’s Travels            Jonathan Swift        1726 \n" +
                 "04  Clarissa                      Samuel Richardson     1748 \n" +
@@ -97,7 +106,7 @@ public class BibliotecaTest {
         this.log.clearLog();
         biblioteca.printBookList();
         String actualBookList = this.log.getLog();
-        String expectBookList = ALL_BOOK_LIST;
+        String expectBookList = PREFIX_STRING + ALL_BOOK_LIST;
         assertEquals(expectBookList, actualBookList);
     }
 
