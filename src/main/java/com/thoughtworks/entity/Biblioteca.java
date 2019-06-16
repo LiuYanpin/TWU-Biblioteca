@@ -55,7 +55,11 @@ public class Biblioteca {
     }
 
     public void returnBook(String bookId) {
-        lentBooks.remove(bookId);
-        System.out.println("Thank you for returning the book");
+        if (lentBooks.contains(bookId)) {
+            System.out.println("Thank you for returning the book");
+            lentBooks.remove(bookId);
+        } else {
+            System.out.println("That is not a valid book to return.");
+        }
     }
 }

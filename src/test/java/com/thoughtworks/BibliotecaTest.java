@@ -110,4 +110,12 @@ public class BibliotecaTest {
         String actualMessage = this.log.getLog();
         assertEquals(expectMessage, actualMessage);
     }
+
+    @Test
+    public void should_get_notified_message_when_return_book_unsuccessfully() {
+        biblioteca.returnBook("99");
+        String expectMessage = "That is not a valid book to return.\n";
+        String actualMessage = this.log.getLog();
+        assertEquals(expectMessage, actualMessage);
+    }
 }
