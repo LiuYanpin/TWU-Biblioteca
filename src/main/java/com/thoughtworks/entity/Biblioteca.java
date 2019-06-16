@@ -43,6 +43,7 @@ public class Biblioteca {
 
     public void checkOutBook(String bookId) {
         lentBooks.add(bookId);
+        System.out.println("Thank you!Enjoy the book");
     }
 
     public boolean containsBook(String bookId) {

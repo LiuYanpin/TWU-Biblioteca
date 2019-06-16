@@ -71,4 +71,12 @@ public class BibliotecaTest {
                 "10  Jane Eyre                     Charlotte Brontë      1847 \n";;
         assertEquals(expectBookList, actualBookList);
     }
+
+    @Test
+    public void should_print_success_message_when_succeeded_check_out_book() {
+        biblioteca.checkOutBook("01");
+        String expectSuccessMessage = "Thank you!Enjoy the book\n";
+        String actualSuccessMessage = this.log.getLog();
+        assertEquals(expectSuccessMessage, actualSuccessMessage);
+    }
 }
