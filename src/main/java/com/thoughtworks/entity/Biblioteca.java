@@ -53,4 +53,8 @@ public class Biblioteca {
     public boolean containsBook(String bookId) {
         return BOOK_LIST.stream().anyMatch(book -> bookId.equals(book.getId()));
     }
+
+    public void returnBook(String bookId) {
+        lentBooks.remove(bookId);
+    }
 }

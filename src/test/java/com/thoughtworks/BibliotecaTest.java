@@ -10,6 +10,17 @@ import static org.junit.Assert.assertEquals;
 
 public class BibliotecaTest {
 
+    private static final String ALL_BOOK_LIST =
+            "01  The Pilgrim’s Progress        John Bunyan           1678 \n" +
+            "02  Robinson Crusoe               Daniel Defoe          1719 \n" +
+            "03  Gulliver’s Travels            Jonathan Swift        1726 \n" +
+            "04  Clarissa                      Samuel Richardson     1748 \n" +
+            "05  Tom Jones                     Henry Fielding        1749 \n" +
+            "06  Emma                          Jane Austen           1816 \n" +
+            "07  Frankenstein                  Mary Shelley          1818 \n" +
+            "08  Nightmare Abbey               Thomas Love Peacock   1818 \n" +
+            "09  Sybil                         Benjamin Disraeli     1845 \n" +
+            "10  Jane Eyre                     Charlotte Brontë      1847 \n";
     private Biblioteca biblioteca;
 
     @Rule
@@ -32,17 +43,7 @@ public class BibliotecaTest {
     public void should_print_book_list_when_after_welcome_message_appears() {
         biblioteca.printBookList();
         String actualBookString = this.log.getLog();
-        String expectBookString =
-                "01  The Pilgrim’s Progress        John Bunyan           1678 \n" +
-                "02  Robinson Crusoe               Daniel Defoe          1719 \n" +
-                "03  Gulliver’s Travels            Jonathan Swift        1726 \n" +
-                "04  Clarissa                      Samuel Richardson     1748 \n" +
-                "05  Tom Jones                     Henry Fielding        1749 \n" +
-                "06  Emma                          Jane Austen           1816 \n" +
-                "07  Frankenstein                  Mary Shelley          1818 \n" +
-                "08  Nightmare Abbey               Thomas Love Peacock   1818 \n" +
-                "09  Sybil                         Benjamin Disraeli     1845 \n" +
-                "10  Jane Eyre                     Charlotte Brontë      1847 \n";
+        String expectBookString = ALL_BOOK_LIST;
         assertEquals(expectBookString, actualBookString);
     }
 
@@ -69,7 +70,7 @@ public class BibliotecaTest {
                 "07  Frankenstein                  Mary Shelley          1818 \n" +
                 "08  Nightmare Abbey               Thomas Love Peacock   1818 \n" +
                 "09  Sybil                         Benjamin Disraeli     1845 \n" +
-                "10  Jane Eyre                     Charlotte Brontë      1847 \n";;
+                "10  Jane Eyre                     Charlotte Brontë      1847 \n";
         assertEquals(expectBookList, actualBookList);
     }
 
@@ -88,4 +89,16 @@ public class BibliotecaTest {
         String actualMessage = this.log.getLog();
         assertEquals(expectMessage, actualMessage);
     }
+
+    @Test
+    public void should_print_returned_book_when_return_a_book() {
+        biblioteca.checkOutBook("01");
+        biblioteca.returnBook("01");
+        this.log.clearLog();
+        biblioteca.printBookList();
+        String actualBookList = this.log.getLog();
+        String expectBookList = ALL_BOOK_LIST;
+        assertEquals(expectBookList, actualBookList);
+    }
+
 }
