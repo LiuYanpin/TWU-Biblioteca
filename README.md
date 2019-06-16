@@ -4,7 +4,7 @@
 
 # Run
 - Application -> run main method
-- ./gradlew run
+
 
 # Test
 - ./gradlew test
