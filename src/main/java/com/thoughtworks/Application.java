@@ -18,10 +18,7 @@ public class Application {
                 case "01":
                     biblioteca.printBookList();
                     System.out.println("Which book do you want to check-out?");
-                    option = scanner.nextLine();
-                    if (biblioteca.containsBook(option)) {
-                        biblioteca.checkOutBook(option);
-                    }
+                    biblioteca.checkOutBook(scanner.nextLine());
                     break;
                 case "02":
                     System.exit(0);

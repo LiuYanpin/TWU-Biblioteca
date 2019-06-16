@@ -42,8 +42,12 @@ public class Biblioteca {
     }
 
     public void checkOutBook(String bookId) {
-        lentBooks.add(bookId);
-        System.out.println("Thank you!Enjoy the book");
+        if (containsBook(bookId)) {
+            lentBooks.add(bookId);
+            System.out.println("Thank you!Enjoy the book");
+        } else {
+            System.out.println("Sorry, that book is not available");
+        }
     }
 
     public boolean containsBook(String bookId) {

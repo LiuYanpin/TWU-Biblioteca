@@ -57,6 +57,7 @@ public class BibliotecaTest {
     @Test
     public void should_print_remaining_books_when_check_out_a_book() {
         biblioteca.checkOutBook("01");
+        this.log.clearLog();
         biblioteca.printBookList();
         String actualBookList = this.log.getLog();
         String expectBookList =
@@ -78,5 +79,13 @@ public class BibliotecaTest {
         String expectSuccessMessage = "Thank you!Enjoy the book\n";
         String actualSuccessMessage = this.log.getLog();
         assertEquals(expectSuccessMessage, actualSuccessMessage);
+    }
+
+    @Test
+    public void should_print_un_successful_message_when_failed_check_out_book() {
+        biblioteca.checkOutBook("99");
+        String expectMessage = "Sorry, that book is not available\n";
+        String actualMessage = this.log.getLog();
+        assertEquals(expectMessage, actualMessage);
     }
 }
