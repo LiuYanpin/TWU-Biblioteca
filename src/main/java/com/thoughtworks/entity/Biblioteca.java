@@ -28,7 +28,8 @@ public class Biblioteca {
             new Menu("04", "Return book"),
             new Menu("05", "List of movies"),
             new Menu("06", "Check-out movie"),
-            new Menu("07", "Return movie")
+            new Menu("07", "Return movie"),
+            new Menu("08", "My Information")
     );
 
     private List<Movie> MOVIE_LIST = Lists.newArrayList(

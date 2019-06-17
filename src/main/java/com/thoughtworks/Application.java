@@ -55,6 +55,7 @@ public class Application {
                     break;
                 case "08":
                     biblioteca.viewUserInfo(user);
+                    break;
                 default:
                     System.out.println("Please select a valid option!");
                     break;
