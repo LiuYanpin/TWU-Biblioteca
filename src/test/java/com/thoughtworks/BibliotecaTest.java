@@ -8,6 +8,8 @@ import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class BibliotecaTest {
 
@@ -182,5 +184,13 @@ public class BibliotecaTest {
         String expectMessage = "That is not a valid movie to return.\n";
         String actualMessage = this.log.getLog();
         assertEquals(expectMessage, actualMessage);
+    }
+
+    @Test
+    public void should_get_success_message_when_user_use_correct_library_number_and_password() {
+        boolean loginResultWithCorrectInfo = biblioteca.login("100-0001", "1qaz@WSX");
+        assertTrue(loginResultWithCorrectInfo);
+        boolean loginResultWithWrongInfo = biblioteca.login("100-0001", "12345678");
+        assertFalse(loginResultWithWrongInfo);
     }
 }

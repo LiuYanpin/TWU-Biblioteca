@@ -43,6 +43,11 @@ public class Biblioteca {
             new Movie("10", "Saving Private Ryan")
     );
 
+    private List<User> USER_LIST = Lists.newArrayList(
+        new User("100-0001", "1qaz@WSX"),
+        new User("100-0002", "3edc%TGB")
+    );
+
     private List<String> lentBooks = new ArrayList<>();
     private List<String> lentMovies = new ArrayList<>();
 
@@ -83,14 +88,6 @@ public class Biblioteca {
         }
     }
 
-    private boolean containsBook(String bookId) {
-        return BOOK_LIST.stream().anyMatch(book -> bookId.equals(book.getId()) && !lentBooks.contains(bookId));
-    }
-
-    private void printTitle(String title) {
-        System.out.println(StringUtils.repeat("*", 30) + " " + title + " " + StringUtils.repeat("*", 30));
-    }
-
     public void printMovieList() {
         printTitle("Movie List");
         MOVIE_LIST.stream()
@@ -107,8 +104,9 @@ public class Biblioteca {
         }
     }
 
-    private boolean containsMovie(String movieId) {
-        return MOVIE_LIST.stream().anyMatch(movie -> movieId.equals(movie.getId()) && !lentMovies.contains(movieId));
+
+    public boolean login(String libraryNumber, String password) {
+        return USER_LIST.stream().anyMatch(user -> libraryNumber.equals(user.getLibraryNumber()) && password.equals(user.getPassword()));
     }
 
     public void returnMovie(String movieId) {
@@ -119,4 +117,22 @@ public class Biblioteca {
             System.out.println("That is not a valid movie to return.");
         }
     }
+
+    private boolean containsBook(String bookId) {
+        return BOOK_LIST.stream().anyMatch(book -> bookId.equals(book.getId()) && !lentBooks.contains(bookId));
+    }
+
+    private boolean containsMovie(String movieId) {
+        return MOVIE_LIST.stream().anyMatch(movie -> movieId.equals(movie.getId()) && !lentMovies.contains(movieId));
+    }
+
+    private void printTitle(String title) {
+        System.out.println(new StringBuilder()
+                .append(StringUtils.repeat("*", 30))
+                .append(" ")
+                .append(title)
+                .append(" ")
+                .append(StringUtils.repeat("*", 30)));
+    }
+
 }
