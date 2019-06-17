@@ -155,4 +155,12 @@ public class BibliotecaTest {
         String actualMessage = this.log.getLog();
         assertEquals(expectMessage, actualMessage);
     }
+
+    @Test
+    public void should_print_failed_message_when_failed_check_out_a_movie() {
+        biblioteca.checkOutMovie("99");
+        String expectMessage = "Sorry, that movie is not available\n";
+        String actualMessage = this.log.getLog();
+        assertEquals(expectMessage, actualMessage);
+    }
 }

@@ -90,13 +90,21 @@ public class Biblioteca {
 
     public void printMovieList() {
         printTitle("Movie List");
-        for (Movie movie: MOVIE_LIST) {
+        for (Movie movie : MOVIE_LIST) {
             System.out.println(movie);
         }
     }
 
     public void checkOutMovie(String movieId) {
-        lentMovies.add(movieId);
-        System.out.println("Thank you! Enjoy the movie");
+        if (containsMovie(movieId)) {
+            lentMovies.add(movieId);
+            System.out.println("Thank you! Enjoy the movie");
+        } else {
+            System.out.println("Sorry, that movie is not available");
+        }
+    }
+
+    private boolean containsMovie(String movieId) {
+        return MOVIE_LIST.stream().anyMatch(movie -> movieId.equals(movie.getId()) && !lentMovies.contains(movieId));
     }
 }
