@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Biblioteca {
     private final String WELCOME_MESSAGE = "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!";
@@ -44,8 +45,8 @@ public class Biblioteca {
     );
 
     private List<User> USER_LIST = Lists.newArrayList(
-        new User("100-0001", "1qaz@WSX"),
-        new User("100-0002", "3edc%TGB")
+        new User("100-0001", "1qaz@WSX", "Morgan Freeman", "morganfreeman@gmail.com", "100122133"),
+        new User("100-0002", "3edc%TGB", "Brad Pitt", "bradpitt@gmail.com", "223334445")
     );
 
     private List<String> lentBooks = new ArrayList<>();
@@ -105,8 +106,8 @@ public class Biblioteca {
     }
 
 
-    public boolean login(String libraryNumber, String password) {
-        return USER_LIST.stream().anyMatch(user -> libraryNumber.equals(user.getLibraryNumber()) && password.equals(user.getPassword()));
+    public Optional<User> login(String libraryNumber, String password) {
+        return USER_LIST.stream().filter(user -> libraryNumber.equals(user.getLibraryNumber()) && password.equals(user.getPassword())).findFirst();
     }
 
     public void returnMovie(String movieId) {
@@ -135,4 +136,7 @@ public class Biblioteca {
                 .append(StringUtils.repeat("*", 30)));
     }
 
+    public void viewUserInfo(User user) {
+        System.out.println(user);
+    }
 }

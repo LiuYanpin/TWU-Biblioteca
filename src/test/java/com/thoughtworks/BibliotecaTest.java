@@ -188,9 +188,17 @@ public class BibliotecaTest {
 
     @Test
     public void should_get_success_message_when_user_use_correct_library_number_and_password() {
-        boolean loginResultWithCorrectInfo = biblioteca.login("100-0001", "1qaz@WSX");
+        boolean loginResultWithCorrectInfo = biblioteca.login("100-0001", "1qaz@WSX").isPresent();
         assertTrue(loginResultWithCorrectInfo);
-        boolean loginResultWithWrongInfo = biblioteca.login("100-0001", "12345678");
+        boolean loginResultWithWrongInfo = biblioteca.login("100-0001", "12345678").isPresent();
         assertFalse(loginResultWithWrongInfo);
+    }
+
+    @Test
+    public void should_print_logined_user_information_when_user_choose_info_menu() {
+        biblioteca.viewUserInfo(biblioteca.login("100-0001", "1qaz@WSX").get());
+        String expectMessage = "Morgan Freeman\nmorganfreeman@gmail.com\n100122133\n";
+        String actualMessage = this.log.getLog();
+        assertEquals(expectMessage, actualMessage);
     }
 }

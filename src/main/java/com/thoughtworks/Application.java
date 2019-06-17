@@ -2,7 +2,9 @@ package com.thoughtworks;
 
 import com.google.common.base.Strings;
 import com.thoughtworks.entity.Biblioteca;
+import com.thoughtworks.entity.User;
 
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Application {
@@ -11,17 +13,17 @@ public class Application {
         Biblioteca biblioteca = new Biblioteca();
         biblioteca.printWelcomeMessage();
 
-        boolean loginResult = getLoginResult(biblioteca);
-        while (!loginResult) {
+        Optional<User> loginResult = getLoginResult(biblioteca);
+        while (!loginResult.isPresent()) {
             System.out.println("Login failed");
             loginResult = getLoginResult(biblioteca);
         }
         System.out.println("Login successfully");
         biblioteca.printMenu();
-        processMenu(biblioteca);
+        processMenu(biblioteca, loginResult.get());
     }
 
-    private static void processMenu(Biblioteca biblioteca) {
+    private static void processMenu(Biblioteca biblioteca, User user) {
         Scanner scanner = new Scanner(System.in);
         String option = scanner.nextLine();
         while (!Strings.isNullOrEmpty(option)) {
@@ -51,6 +53,8 @@ public class Application {
                     System.out.println("Which movie do you want to return?");
                     biblioteca.returnMovie(scanner.nextLine());
                     break;
+                case "08":
+                    biblioteca.viewUserInfo(user);
                 default:
                     System.out.println("Please select a valid option!");
                     break;
@@ -60,7 +64,7 @@ public class Application {
         }
     }
 
-    private static boolean getLoginResult(Biblioteca biblioteca) {
+    private static Optional<User> getLoginResult(Biblioteca biblioteca) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please input your library number:(Enter \"Q\" to quit.)");
         String libraryNumber = scanner.nextLine();
