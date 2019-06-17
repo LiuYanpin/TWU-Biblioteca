@@ -163,4 +163,22 @@ public class BibliotecaTest {
         String actualMessage = this.log.getLog();
         assertEquals(expectMessage, actualMessage);
     }
+
+    @Test
+    public void should_get_notified_message_when_return_a_movie_successfully() {
+        biblioteca.checkOutMovie("01");
+        this.log.clearLog();
+        biblioteca.returnMovie("01");
+        String expectMessage = "Thank you for returning the movie\n";
+        String actualMessage = this.log.getLog();
+        assertEquals(expectMessage, actualMessage);
+    }
+
+    @Test
+    public void should_get_notified_message_when_return_movie_unsuccessfully() {
+        biblioteca.returnMovie("99");
+        String expectMessage = "That is not a valid movie to return.\n";
+        String actualMessage = this.log.getLog();
+        assertEquals(expectMessage, actualMessage);
+    }
 }

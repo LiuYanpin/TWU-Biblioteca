@@ -107,4 +107,13 @@ public class Biblioteca {
     private boolean containsMovie(String movieId) {
         return MOVIE_LIST.stream().anyMatch(movie -> movieId.equals(movie.getId()) && !lentMovies.contains(movieId));
     }
+
+    public void returnMovie(String movieId) {
+        if (lentMovies.contains(movieId)) {
+            System.out.println("Thank you for returning the movie");
+            lentMovies.remove(movieId);
+        } else {
+            System.out.println("That is not a valid movie to return.");
+        }
+    }
 }
