@@ -72,6 +72,8 @@ public class BibliotecaTest {
                 "03  Check-out book\n" +
                 "04  Return book\n" +
                 "05  List of movies\n" +
+                "06  Check-out movie\n" +
+                "07  Return movie\n" +
                 "Please select a valid option:\n";
         assertEquals(expectMenuString, actualMenuString);
     }

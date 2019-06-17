@@ -28,6 +28,17 @@ public class Application {
                     System.out.println("Which book do you want to return?");
                     biblioteca.returnBook(scanner.nextLine());
                     break;
+                case "05":
+                    biblioteca.printMovieList();
+                    break;
+                case "06":
+                    System.out.println("Which movie do you want to check-out?");
+                    biblioteca.checkOutMovie(scanner.nextLine());
+                    break;
+                case "07":
+                    System.out.println("Which movie do you want to return?");
+                    biblioteca.returnMovie(scanner.nextLine());
+                    break;
                 default:
                     System.out.println("Please select a valid option!");
                     break;

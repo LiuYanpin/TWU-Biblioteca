@@ -25,8 +25,11 @@ public class Biblioteca {
             new Menu("02", "Exit"),
             new Menu("03", "Check-out book"),
             new Menu("04", "Return book"),
-            new Menu("05", "List of movies")
+            new Menu("05", "List of movies"),
+            new Menu("06", "Check-out movie"),
+            new Menu("07", "Return movie")
     );
+
     private List<Movie> MOVIE_LIST = Lists.newArrayList(
             new Movie("01", "The Godfather"),
             new Movie("02", "The Shawshank Redemption"),
@@ -90,9 +93,9 @@ public class Biblioteca {
 
     public void printMovieList() {
         printTitle("Movie List");
-        for (Movie movie : MOVIE_LIST) {
-            System.out.println(movie);
-        }
+        MOVIE_LIST.stream()
+                .filter(movie -> !lentMovies.contains(movie.getId()))
+                .forEach(movie -> System.out.println(movie));
     }
 
     public void checkOutMovie(String movieId) {
