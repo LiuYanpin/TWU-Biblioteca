@@ -147,4 +147,12 @@ public class BibliotecaTest {
         String actualMovieList = this.log.getLog();
         assertEquals(expectMovieList, actualMovieList);
     }
+
+    @Test
+    public void should_print_success_message_when_check_out_a_movie() {
+        biblioteca.checkOutMovie("01");
+        String expectMessage = "Thank you! Enjoy the movie\n";
+        String actualMessage = this.log.getLog();
+        assertEquals(expectMessage, actualMessage);
+    }
 }

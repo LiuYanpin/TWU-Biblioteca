@@ -41,6 +41,7 @@ public class Biblioteca {
     );
 
     private List<String> lentBooks = new ArrayList<>();
+    private List<String> lentMovies = new ArrayList<>();
 
     public void printWelcomeMessage() {
         System.out.println(WELCOME_MESSAGE);
@@ -92,5 +93,10 @@ public class Biblioteca {
         for (Movie movie: MOVIE_LIST) {
             System.out.println(movie);
         }
+    }
+
+    public void checkOutMovie(String movieId) {
+        lentMovies.add(movieId);
+        System.out.println("Thank you! Enjoy the movie");
     }
 }
