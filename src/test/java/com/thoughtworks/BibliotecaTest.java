@@ -11,7 +11,9 @@ import static org.junit.Assert.assertEquals;
 
 public class BibliotecaTest {
 
-    private static final String PREFIX_STRING = StringUtils.repeat("*", 30) + " Book List " + StringUtils.repeat("*", 26) + "\n";
+    private Biblioteca biblioteca;
+    private static final String PREFIX_BOOK = StringUtils.repeat("*", 30) + " Book List " + StringUtils.repeat("*", 30) + "\n";
+    private static final String PREFIX_MOVIE = StringUtils.repeat("*", 30) + " Movie List " + StringUtils.repeat("*", 30) + "\n";
     private static final String ALL_BOOK_LIST =
             "01  The Pilgrim’s Progress        John Bunyan           1678 \n" +
             "02  Robinson Crusoe               Daniel Defoe          1719 \n" +
@@ -23,7 +25,17 @@ public class BibliotecaTest {
             "08  Nightmare Abbey               Thomas Love Peacock   1818 \n" +
             "09  Sybil                         Benjamin Disraeli     1845 \n" +
             "10  Jane Eyre                     Charlotte Brontë      1847 \n";
-    private Biblioteca biblioteca;
+    private static final String ALL_MOVIE_LIST =
+            "01  The Godfather\n" +
+            "02  The Shawshank Redemption\n" +
+            "03  Pulp Fiction\n" +
+            "04  Star Wars\n" +
+            "05  The Dark Knight\n" +
+            "06  Goodfellas\n" +
+            "07  The Godfather Part II\n" +
+            "08  The Matrix\n" +
+            "09  Schindler's List\n" +
+            "10  Saving Private Ryan\n";
 
     @Rule
     public final SystemOutRule log = new SystemOutRule().enableLog();
@@ -45,17 +57,16 @@ public class BibliotecaTest {
     public void should_print_book_list_when_after_welcome_message_appears() {
         biblioteca.printBookList();
         String actualBookString = this.log.getLog();
-        String expectBookString = PREFIX_STRING + ALL_BOOK_LIST;
+        String expectBookString = PREFIX_BOOK + ALL_BOOK_LIST;
         assertEquals(expectBookString, actualBookString);
     }
 
     @Test
     public void should_print_menu_of_options() {
         biblioteca.printMenu();
-
         String actualMenuString = this.log.getLog();
-        String prefixString = StringUtils.repeat("*", 30) + " Menu " + StringUtils.repeat("*", 30);
-        String expectMenuString = "****************************** Menu ******************************\n" +
+        String prefixString = StringUtils.repeat("*", 30) + " Menu " + StringUtils.repeat("*", 30) + "\n";
+        String expectMenuString = prefixString +
                 "01  List of books\n" +
                 "02  Exit\n" +
                 "03  Check-out book\n" +
@@ -70,7 +81,7 @@ public class BibliotecaTest {
         this.log.clearLog();
         biblioteca.printBookList();
         String actualBookList = this.log.getLog();
-        String expectBookList = PREFIX_STRING +
+        String expectBookList = PREFIX_BOOK +
                 "02  Robinson Crusoe               Daniel Defoe          1719 \n" +
                 "03  Gulliver’s Travels            Jonathan Swift        1726 \n" +
                 "04  Clarissa                      Samuel Richardson     1748 \n" +
@@ -106,7 +117,7 @@ public class BibliotecaTest {
         this.log.clearLog();
         biblioteca.printBookList();
         String actualBookList = this.log.getLog();
-        String expectBookList = PREFIX_STRING + ALL_BOOK_LIST;
+        String expectBookList = PREFIX_BOOK + ALL_BOOK_LIST;
         assertEquals(expectBookList, actualBookList);
     }
 
@@ -126,5 +137,13 @@ public class BibliotecaTest {
         String expectMessage = "That is not a valid book to return.\n";
         String actualMessage = this.log.getLog();
         assertEquals(expectMessage, actualMessage);
+    }
+
+    @Test
+    public void should_print_movie_list_when_choose_movie_list() {
+        biblioteca.printMovieList();
+        String expectMovieList = PREFIX_MOVIE + ALL_MOVIE_LIST;
+        String actualMovieList = this.log.getLog();
+        assertEquals(expectMovieList, actualMovieList);
     }
 }

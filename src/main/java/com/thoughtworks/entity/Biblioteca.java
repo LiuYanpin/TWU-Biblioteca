@@ -24,7 +24,20 @@ public class Biblioteca {
             new Menu("01", "List of books"),
             new Menu("02", "Exit"),
             new Menu("03", "Check-out book"),
-            new Menu("04", "Return book")
+            new Menu("04", "Return book"),
+            new Menu("05", "List of movies")
+    );
+    private List<Movie> MOVIE_LIST = Lists.newArrayList(
+            new Movie("01", "The Godfather"),
+            new Movie("02", "The Shawshank Redemption"),
+            new Movie("03", "Pulp Fiction"),
+            new Movie("04", "Star Wars"),
+            new Movie("05", "The Dark Knight"),
+            new Movie("06", "Goodfellas"),
+            new Movie("07", "The Godfather Part II"),
+            new Movie("08", "The Matrix"),
+            new Movie("09", "Schindler's List"),
+            new Movie("10", "Saving Private Ryan")
     );
 
     private List<String> lentBooks = new ArrayList<>();
@@ -34,14 +47,14 @@ public class Biblioteca {
     }
 
     public void printBookList() {
-        System.out.println(StringUtils.repeat("*", 30) + " Book List " + StringUtils.repeat("*", 26));
+        printTitle("Book List");
         BOOK_LIST.stream()
                 .filter(book -> !lentBooks.contains(book.getId()))
                 .forEach(book -> System.out.println(book));
     }
 
     public void printMenu() {
-        System.out.println(StringUtils.repeat("*", 30) + " Menu " + StringUtils.repeat("*", 30));
+        printTitle("Menu");
         for (Menu menu : MENU_LIST) {
             System.out.println(menu);
         }
@@ -68,5 +81,16 @@ public class Biblioteca {
 
     private boolean containsBook(String bookId) {
         return BOOK_LIST.stream().anyMatch(book -> bookId.equals(book.getId()) && !lentBooks.contains(bookId));
+    }
+
+    private void printTitle(String title) {
+        System.out.println(StringUtils.repeat("*", 30) + " " + title + " " + StringUtils.repeat("*", 30));
+    }
+
+    public void printMovieList() {
+        printTitle("Movie List");
+        for (Movie movie: MOVIE_LIST) {
+            System.out.println(movie);
+        }
     }
 }
